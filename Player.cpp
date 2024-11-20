@@ -41,21 +41,7 @@ void Player::updatePlayerDir()
                 }
                 break;
 
-            case 'W':                   //For up
-                if(myDir != DOWN)   //Checks that the direction is not changing by more than 90 degrees
-                {
-                    myDir = UP;     //Sets the new direction
-                }
-                break;
-
             case 'a':
-                if(myDir != RIGHT)
-                {
-                    myDir = LEFT;
-                }
-                break;
-
-            case 'A':
                 if(myDir != RIGHT)
                 {
                     myDir = LEFT;
@@ -69,12 +55,6 @@ void Player::updatePlayerDir()
                 }
                 break;
 
-            case 'S':
-                if(myDir != UP)
-                {
-                    myDir = DOWN;
-                }
-                break;
             
             case 'd':
                 if(myDir != LEFT)
@@ -83,10 +63,18 @@ void Player::updatePlayerDir()
                 }
                 break;
 
-            case 'D':
-                if(myDir != LEFT)
-                {
+            default:  
+                if(input == 'a'){
+                    myDir = LEFT;
+                }       
+                else if(input == 'd'){
                     myDir = RIGHT;
+                }
+                else if(input == 'w'){
+                    myDir = UP;
+                }       
+                else if(input == 's'){
+                    myDir = DOWN;
                 }
                 break;
         }
