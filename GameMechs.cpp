@@ -23,6 +23,10 @@ GameMechs::GameMechs(int boardX, int boardY)
     boardSizeY = boardY;   
 }
 
+// Copy COnstructor
+
+// Copy Assignment Operatoer
+
 // do you need a destructor?
 GameMechs::~GameMechs()
 {
@@ -50,7 +54,7 @@ char GameMechs::getInput()
 
 int GameMechs::getScore() const
 {
-
+    
 }
 
 void GameMechs::incrementScore()

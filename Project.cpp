@@ -48,7 +48,7 @@ void Initialize(void)
     
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
-
+    cout << "hi";
     exitFlag = false;
 }
 
@@ -59,16 +59,46 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    
+    myPlayer->updatePlayerDir();
+    myPlayer->movePlayer();
+    cout << "hello";
 }
 
 void DrawScreen(void)
 {
     MacUILib_clearScreen();  
-
+    int printed = 0;
     objPos playerPos = myPlayer -> getPlayerPos();
 
-    MacUILib_printf("Player [x, y, sym] = [%d, %d, %c]\n", playerPos.pos -> x, playerPos.pos -> y, playerPos.symbol); 
+    for (int j = 0; j < 10; j++) {
+        for(int i = 0; i < 20; i++) {
+            if(playerPos.pos -> x == i &&  playerPos.pos -> y == j){
+                MacUILib_printf("%c", playerPos.symbol);
+                printed = 1;
+            }
+            else if(i == 5 && j == 5){
+                MacUILib_printf("+");
+            }
+            else if(i == 12 && j == 2){
+                MacUILib_printf("+");
+            }
+            else if(i == 7 && j == 7){
+                MacUILib_printf("+");
+            }    
+            else if (j == 0 || j == 9 || i == 0 || i == 19) {
+                MacUILib_printf("#");  
+            } 
+            else {
+                MacUILib_printf(" "); 
+            }
+             
+        }
+        MacUILib_printf("\n");  
+     }
+
+
+    // MacUILib_printf("Player [x, y, sym] = [%d, %d, %c]\n", playerPos.pos -> x, playerPos.pos -> y, playerPos.symbol); 
+    // I DONT THINK WE NEED THIS AFTER I IMPLEMENTED THE DRAWBOARD.
 }
 
 void LoopDelay(void)
