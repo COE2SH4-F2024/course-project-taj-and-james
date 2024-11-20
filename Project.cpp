@@ -48,20 +48,20 @@ void Initialize(void)
     
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
-    cout << "hi";
+    // MacUILib_printf("hi");
     exitFlag = false;
 }
 
 void GetInput(void)
 {
-   
+   myGM->getInput();
 }
 
 void RunLogic(void)
 {
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
-    cout << "hello";
+    // MacUILib_printf("hello");
 }
 
 void DrawScreen(void)

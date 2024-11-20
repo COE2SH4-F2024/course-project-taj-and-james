@@ -50,6 +50,7 @@ char GameMechs::getInput()
     {
        input = MacUILib_getChar();      // Records input
     }
+    return input;
 }
 
 int GameMechs::getScore() const
