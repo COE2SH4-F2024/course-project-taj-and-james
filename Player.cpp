@@ -84,8 +84,6 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
-    Player*myPlayer;
-    objPos playerPos = myPlayer -> getPlayerPos();
 
     switch(myDir){
         case LEFT:
