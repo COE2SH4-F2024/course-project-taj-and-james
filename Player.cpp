@@ -106,19 +106,19 @@ void Player::movePlayer()
             break;
     }
 
-    if(playerPos.pos -> x > 18){
+    if(playerPos.pos -> x > 28){
         playerPos.pos -> x = 1;
     }
 
     if(playerPos.pos -> x < 1){
-        playerPos.pos -> x = 18;
+        playerPos.pos -> x = 28;
     }
 
-    if(playerPos.pos -> y > 8){
+    if(playerPos.pos -> y > 13){
         playerPos.pos -> y = 1;
     }
     if(playerPos.pos -> y < 1){
-        playerPos.pos -> y = 8;
+        playerPos.pos -> y = 13;
     }             
 }
 

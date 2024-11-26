@@ -8,8 +8,8 @@ GameMechs::GameMechs()
     loseFlag = false;
     score = 0;
 
-    boardSizeX = 20;
-    boardSizeY = 10;    
+    boardSizeX = 30;
+    boardSizeY = 15;    
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -35,12 +35,12 @@ GameMechs::~GameMechs()
 
 bool GameMechs::getExitFlagStatus() const
 {
-
+    return exitFlag;        //1B
 }
 
 bool GameMechs::getLoseFlagStatus() const
 {
-
+    return loseFlag;   //1B
 }
     
 
@@ -55,12 +55,12 @@ char GameMechs::getInput()
 
 int GameMechs::getScore() const
 {
-    
+    return score;
 }
 
 void GameMechs::incrementScore()
 {
-    
+    score++;
 }
 
 int GameMechs::getBoardSizeX() const
@@ -76,22 +76,22 @@ int GameMechs::getBoardSizeY() const
 
 void GameMechs::setExitTrue()
 {
-
+    exitFlag = true;        // Did it cause i think its right 
 }
 
 void GameMechs::setLoseFlag()
 {
-    
+    loseFlag = true;   // Did it cause i think its right 
 }
 
 void GameMechs::setInput(char this_input)
 {
-
+    this_input = input;   // I THINK THIS IS RIGHT IDK?
 }
 
 void GameMechs::clearInput()
 {
-
+    input = 0;    // ALSO THINK ITS RIGHT
 }
 
 // More methods should be added here

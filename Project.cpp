@@ -11,8 +11,6 @@ using namespace std;
 Player *myPlayer; //Global pointer meant to instantiate a player object on the heap
 GameMechs *myGM;
 
-bool exitFlag;
-
 void Initialize(void);
 void GetInput(void);
 void RunLogic(void);
@@ -20,14 +18,12 @@ void DrawScreen(void);
 void LoopDelay(void);
 void CleanUp(void);
 
-
-
 int main(void)
 {
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(myGM ->getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -48,13 +44,12 @@ void Initialize(void)
     
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
-    // MacUILib_printf("hi");
-    exitFlag = false;
+
 }
 
 void GetInput(void)
 {
-   myGM->getInput();
+    myGM->getInput();
 }
 
 void RunLogic(void)
@@ -62,6 +57,10 @@ void RunLogic(void)
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
     // MacUILib_printf("hello");
+
+    if(myGM->getInput() == 27){
+        myGM -> setExitTrue();
+    }
 }
 
 void DrawScreen(void)
@@ -70,11 +69,10 @@ void DrawScreen(void)
     int printed = 0;
     objPos playerPos = myPlayer -> getPlayerPos();
 
-    for (int j = 0; j < 10; j++) {
-        for(int i = 0; i < 20; i++) {
+    for (int j = 0; j < myGM->getBoardSizeY(); j++) {
+        for(int i = 0; i < myGM->getBoardSizeX(); i++) {
             if(playerPos.pos -> x == i &&  playerPos.pos -> y == j){
                 MacUILib_printf("%c", playerPos.symbol);
-                printed = 1;
             }
             else if(i == 5 && j == 5){
                 MacUILib_printf("+");
@@ -85,7 +83,7 @@ void DrawScreen(void)
             else if(i == 7 && j == 7){
                 MacUILib_printf("+");
             }    
-            else if (j == 0 || j == 9 || i == 0 || i == 19) {
+            else if (j == 0 || j == 14 || i == 0 || i == 29) {
                 MacUILib_printf("#");  
             } 
             else {
@@ -95,7 +93,9 @@ void DrawScreen(void)
         }
         MacUILib_printf("\n");  
      }
-
+    if(myGM->getExitFlagStatus() == true){
+        MacUILib_printf("YOU EXITED THE GAME");
+    }
 
     // MacUILib_printf("Player [x, y, sym] = [%d, %d, %c]\n", playerPos.pos -> x, playerPos.pos -> y, playerPos.symbol); 
     // I DONT THINK WE NEED THIS AFTER I IMPLEMENTED THE DRAWBOARD.
