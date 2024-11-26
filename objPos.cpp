@@ -21,8 +21,6 @@ objPos::objPos(int xPos, int yPos, char sym)
 
 objPos::objPos(const objPos &copy){
     pos = new Pos;
-    pos->x = 0;
-    pos->y = 0;
     symbol = copy.symbol;
     pos->x = copy.pos->x;                           // Copy Constructor
     pos->y = copy.pos->y;    
@@ -32,9 +30,9 @@ objPos& objPos:: operator=(const objPos &copy){
     if(this != &copy){
         this-> pos->x = copy.pos->x;
         this-> pos->y = copy.pos->y;            // Copy Assignment Operator
-        symbol = copy.symbol;
-        return *this;
+        this->symbol = copy.symbol;
     }
+    return *this;
 }
 
 objPos::~objPos(){
