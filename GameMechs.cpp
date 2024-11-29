@@ -95,3 +95,26 @@ void GameMechs::clearInput()
 }
 
 // More methods should be added here
+
+void GameMechs::generateFood(objPos blockOff)
+{
+    srand(time(NULL)); //seeds random number generator with current time
+
+    int x, y;
+
+    x = (rand() % (boardSizeX-2)+1);
+    y = (rand() % (boardSizeY-2)+1);
+
+    if(x!=blockOff.pos->x && y!=blockOff.pos->y)
+    {
+        foodPos.pos->x = x;
+        foodPos.pos->y = y;
+    }
+
+    foodPos.symbol = '*';
+}
+
+objPos GameMechs::getFoodPos()
+{
+    return foodPos;
+}
