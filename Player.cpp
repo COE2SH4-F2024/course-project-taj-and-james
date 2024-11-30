@@ -123,18 +123,26 @@ void Player::movePlayer()
     }
 
     if(snakehead.pos -> x > 28){
-        snakehead.pos -> x = 1;
+        snakeheadCopy.pos -> x = 1;
+        playerPosList->insertHead(snakeheadCopy);
+        playerPosList->removeTail();
     }
 
     if(snakehead.pos -> x < 1){
-        snakehead.pos -> x = 28;
+        snakeheadCopy.pos -> x = 28;
+        playerPosList->insertHead(snakeheadCopy);
+        playerPosList->removeTail();
     }
 
     if(snakehead.pos -> y > 13){
-        snakehead.pos -> y = 1;
+        snakeheadCopy.pos -> y = 1;
+        playerPosList->insertHead(snakeheadCopy);
+        playerPosList->removeTail();
     }
     if(snakehead.pos -> y < 1){
-        snakehead.pos -> y = 13;
+        snakeheadCopy.pos -> y = 13;
+        playerPosList->insertHead(snakeheadCopy);
+        playerPosList->removeTail();
     }        
 
 }
