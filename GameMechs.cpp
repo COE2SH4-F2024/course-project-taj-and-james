@@ -96,22 +96,29 @@ void GameMechs::clearInput()
 
 // More methods should be added here
 
-void GameMechs::generateFood(objPos blockOff)
+void GameMechs::generateFood(objPosArrayList* blockOff)
 {
     srand(time(NULL)); //seeds random number generator with current time
 
-    int x, y;
+    int x, y, i, flag = 0;
 
     x = (rand() % (boardSizeX-2)+1);
     y = (rand() % (boardSizeY-2)+1);
 
-    if(x!=blockOff.pos->x && y!=blockOff.pos->y)
-    {
+    for(i = 0; i < blockOff->getSize(); i++)
+        if(x==(blockOff->getElement(i).getObjPos().pos->x) && y==(blockOff->getElement(i).getObjPos().pos->y))
+        {
+            generateFood(blockOff);    // JAMES FAULT IF IT DOESNT WORK
+            flag = 1;
+        }
+    
+    if(flag!=1){
         foodPos.pos->x = x;
-        foodPos.pos->y = y;
+        foodPos.pos->y = y;  
     }
+      
 
-    foodPos.symbol = '*';
+    foodPos.symbol = '+';
 }
 
 objPos GameMechs::getFoodPos()

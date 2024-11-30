@@ -44,10 +44,10 @@ void Initialize(void)
     
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
+    
+    objPosArrayList* playerPosList = myPlayer->getPlayerPos();
 
-    objPos playerPos = myPlayer->getPlayerPos();
-
-    myGM->generateFood(playerPos);
+    myGM->generateFood(playerPosList);
 
 }
 
@@ -61,16 +61,16 @@ void RunLogic(void)
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
     // MacUILib_printf("hello");
-    objPos playerPos = myPlayer -> getPlayerPos();
+    objPosArrayList* playerPosList = myPlayer -> getPlayerPos();
     objPos food = myGM->getFoodPos();
 
     if(myGM->getInput() == 27){
         myGM -> setExitTrue();
     }
 
-    if(playerPos.pos->x == food.pos->x && playerPos.pos->y == food.pos->y)
+    if(playerPosList->getHeadElement().pos->x == food.pos->x && playerPosList->getHeadElement().pos->y == food.pos->y)
     {
-        myGM -> generateFood(playerPos);
+        myGM -> generateFood(playerPosList);
     }
 
 }
@@ -80,31 +80,30 @@ void RunLogic(void)
 void DrawScreen(void)
 {
     MacUILib_clearScreen();  
-    int printed = 0;
-    objPos playerPos = myPlayer -> getPlayerPos();
+    
+    objPosArrayList* playerPosList = myPlayer -> getPlayerPos();
     objPos food = myGM->getFoodPos(); 
 
     for (int j = 0; j < myGM->getBoardSizeY(); j++) {
         for(int i = 0; i < myGM->getBoardSizeX(); i++) {
-            if(playerPos.pos -> x == i &&  playerPos.pos -> y == j){
-                MacUILib_printf("%c", playerPos.symbol);
+            int printed = 0;
+            for(int k = 0; k < playerPosList->getSize();k++)
+            {
+                if(i==(playerPosList->getElement(k).getObjPos().pos->x) && j==(playerPosList->getElement(k).getObjPos().pos->y)){
+                    MacUILib_printf("%c", playerPosList->getElement(k).symbol);
+                    printed = 1;
+                    break;
+                }
             }
-            else if(food.pos -> x == i &&  food.pos -> y == j){
+
+            if(printed != 1 && food.pos -> x == i && food.pos -> y == j){
                 MacUILib_printf("%c", food.symbol);
-            }
-            else if(i == 5 && j == 5){
-                MacUILib_printf("+");
-            }
-            else if(i == 12 && j == 2){
-                MacUILib_printf("+");
-            }
-            else if(i == 7 && j == 7){
-                MacUILib_printf("+");
+                printed = 1;
             }    
-            else if (j == 0 || j == 14 || i == 0 || i == 29) {
+            else if((j == 0 || j == 14 || i == 0 || i == 29) && printed != 1) {
                 MacUILib_printf("#");  
             } 
-            else {
+            else if(printed != 1){
                 MacUILib_printf(" "); 
             }
              

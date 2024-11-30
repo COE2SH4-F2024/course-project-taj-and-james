@@ -7,9 +7,11 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
 
     // more actions to be included
-    playerPos.pos->x = mainGameMechsRef -> getBoardSizeX() / 2;
-    playerPos.pos->y = mainGameMechsRef -> getBoardSizeY() / 2;
-    playerPos.symbol = '@';
+    // playerPos.pos->x = mainGameMechsRef -> getBoardSizeX() / 2;
+    // playerPos.pos->y = mainGameMechsRef -> getBoardSizeY() / 2;
+    // playerPos.symbol = '@';
+    playerPosList = new objPosArrayList();
+    playerPosList->insertHead(objPos(15, 7, '*'));
 }
 
 
@@ -18,12 +20,13 @@ Player::~Player()
     // delete any heap members here
     // no keyword "new" in the constructor
     // leave the destructor empty FOR NOW
+    delete playerPosList;
 }
 
-objPos Player::getPlayerPos() const
+objPosArrayList* Player::getPlayerPos() const
 {
     // return the reference to the playerPos arrray list
-    return playerPos;
+    return playerPosList;
 }
 
 void Player::updatePlayerDir()
@@ -84,42 +87,56 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
+    objPos snakehead;
+    snakehead = playerPosList->getHeadElement().getObjPos();
+    objPos snakeheadCopy = playerPosList->getHeadElement().getObjPos();
 
     switch(myDir){
+
+
         case LEFT:
-            playerPos.pos -> x --;
+            snakeheadCopy.pos->x = --snakehead.pos-> x;
+            playerPosList->insertHead(snakeheadCopy);
+            playerPosList->removeTail();
             break;
 
         case RIGHT:
-            playerPos.pos -> x ++;
+            snakeheadCopy.pos->x = ++snakehead.pos -> x;
+            playerPosList->insertHead(snakeheadCopy);
+            playerPosList->removeTail();
             break;
 
         case UP:
-            playerPos.pos -> y--;
+            snakeheadCopy.pos->y = --snakehead.pos -> y;
+            playerPosList->insertHead(snakeheadCopy);
+            playerPosList->removeTail();
             break;
         
         case DOWN:
-            playerPos.pos -> y++;
+            snakeheadCopy.pos->y = ++snakehead.pos -> y;
+            playerPosList->insertHead(snakeheadCopy);
+            playerPosList->removeTail();
             break;
 
         default:
             break;
     }
 
-    if(playerPos.pos -> x > 28){
-        playerPos.pos -> x = 1;
+    if(snakehead.pos -> x > 28){
+        snakehead.pos -> x = 1;
     }
 
-    if(playerPos.pos -> x < 1){
-        playerPos.pos -> x = 28;
+    if(snakehead.pos -> x < 1){
+        snakehead.pos -> x = 28;
     }
 
-    if(playerPos.pos -> y > 13){
-        playerPos.pos -> y = 1;
+    if(snakehead.pos -> y > 13){
+        snakehead.pos -> y = 1;
     }
-    if(playerPos.pos -> y < 1){
-        playerPos.pos -> y = 13;
-    }             
+    if(snakehead.pos -> y < 1){
+        snakehead.pos -> y = 13;
+    }        
+
 }
 
 // More methods to be added
