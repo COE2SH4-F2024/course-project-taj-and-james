@@ -95,25 +95,49 @@ void Player::movePlayer()
 
 
         case LEFT:
-            snakeheadCopy.pos->x = --snakehead.pos-> x;
+            if(snakehead.pos->x == 1){
+                snakeheadCopy.pos->x = 28;
+            }
+            else{
+                snakeheadCopy.pos->x = --snakehead.pos-> x;
+            }
+            
             playerPosList->insertHead(snakeheadCopy);
             playerPosList->removeTail();
             break;
 
         case RIGHT:
-            snakeheadCopy.pos->x = ++snakehead.pos -> x;
+            if(snakehead.pos->x == 28){
+                snakeheadCopy.pos->x = 1;
+            }
+            else{
+                snakeheadCopy.pos->x = ++snakehead.pos-> x;
+            }
+
             playerPosList->insertHead(snakeheadCopy);
             playerPosList->removeTail();
             break;
 
         case UP:
-            snakeheadCopy.pos->y = --snakehead.pos -> y;
+            if(snakehead.pos->y == 1){
+                snakeheadCopy.pos->y = 13;
+            }
+            else{
+                snakeheadCopy.pos->y = --snakehead.pos-> y;
+            }
+            
             playerPosList->insertHead(snakeheadCopy);
             playerPosList->removeTail();
             break;
         
         case DOWN:
-            snakeheadCopy.pos->y = ++snakehead.pos -> y;
+            if(snakehead.pos->y == 13){
+                snakeheadCopy.pos->y = 1;
+            }
+            else{
+                snakeheadCopy.pos->y = ++snakehead.pos-> y;
+            }
+            
             playerPosList->insertHead(snakeheadCopy);
             playerPosList->removeTail();
             break;
@@ -122,28 +146,41 @@ void Player::movePlayer()
             break;
     }
 
-    if(snakehead.pos -> x > 28){
+    if(snakeheadCopy.pos->x == mainGameMechsRef->getFoodPos().pos->x && snakeheadCopy.pos->y == mainGameMechsRef->getFoodPos().pos->y){
+        playerPosList->insertHead(snakeheadCopy);
+        mainGameMechsRef->incrementScore();
+    }
+
+    
+    if(snakeheadCopy.pos -> x > 28){
         snakeheadCopy.pos -> x = 1;
         playerPosList->insertHead(snakeheadCopy);
         playerPosList->removeTail();
     }
 
-    if(snakehead.pos -> x < 1){
+    if(snakeheadCopy.pos -> x < 1){
         snakeheadCopy.pos -> x = 28;
         playerPosList->insertHead(snakeheadCopy);
         playerPosList->removeTail();
     }
 
-    if(snakehead.pos -> y > 13){
+    if(snakeheadCopy.pos -> y > 13){
         snakeheadCopy.pos -> y = 1;
         playerPosList->insertHead(snakeheadCopy);
         playerPosList->removeTail();
     }
-    if(snakehead.pos -> y < 1){
+    if(snakeheadCopy.pos -> y < 1){
         snakeheadCopy.pos -> y = 13;
         playerPosList->insertHead(snakeheadCopy);
         playerPosList->removeTail();
     }        
+
+    for(int i = 0; i < (playerPosList->getSize()) - 2; i++){
+        if(snakehead.pos->x == playerPosList->getElement(i+2).getObjPos().pos->x && snakehead.pos->y == playerPosList->getElement(i+2).getObjPos().pos->y){
+            mainGameMechsRef->setLoseFlag();
+            mainGameMechsRef->setExitTrue();
+        }
+    }
 
 }
 

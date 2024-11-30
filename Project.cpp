@@ -93,6 +93,7 @@ void DrawScreen(void)
                     MacUILib_printf("%c", playerPosList->getElement(k).symbol);
                     printed = 1;
                     break;
+                    
                 }
             }
 
@@ -110,6 +111,8 @@ void DrawScreen(void)
         }
         MacUILib_printf("\n");  
      }
+    MacUILib_printf("\nScore: %d", myGM->getScore());
+    
     if(myGM->getExitFlagStatus() == true){
         MacUILib_printf("YOU EXITED THE GAME");
     }
