@@ -1,6 +1,6 @@
 #ifndef MAC_UI_LIB
 #define MAC_UI_LIB
-
+ 
 	#include <stdio.h>
 	#include <stdlib.h>	
 

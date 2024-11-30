@@ -1,6 +1,6 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
-
+ 
 GameMechs::GameMechs()
 {
     input = 0;

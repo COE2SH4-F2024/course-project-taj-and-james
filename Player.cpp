@@ -1,6 +1,6 @@
 #include "Player.h"
 
-
+ 
 Player::Player(GameMechs* thisGMRef)
 {
     mainGameMechsRef = thisGMRef;

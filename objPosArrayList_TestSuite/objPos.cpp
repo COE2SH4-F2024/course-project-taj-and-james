@@ -1,5 +1,5 @@
 #include "objPos.h"
-
+//change for push
 objPos::objPos()
 {
     pos = new Pos;
