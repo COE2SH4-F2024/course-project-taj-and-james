@@ -103,6 +103,7 @@ void DrawScreen(void)
             }    
             else if((j == 0 || j == 14 || i == 0 || i == 29) && printed != 1) {
                 MacUILib_printf("#");  
+                printed = 1;
             } 
             else if(printed != 1){
                 MacUILib_printf(" "); 
@@ -113,8 +114,11 @@ void DrawScreen(void)
      }
     MacUILib_printf("\nScore: %d", myGM->getScore());
     
-    if(myGM->getExitFlagStatus() == true){
-        MacUILib_printf("YOU EXITED THE GAME");
+    if(myGM->getExitFlagStatus() == true && myGM->getLoseFlagStatus() == false){
+        MacUILib_printf("\nYOU EXITED THE GAME");
+    }
+    if(myGM->getExitFlagStatus() == true && myGM->getLoseFlagStatus() == true){
+        MacUILib_printf("\nYOU LOSE! TRY AGAIN NEXT TIME");
     }
 
     // MacUILib_printf("Player [x, y, sym] = [%d, %d, %c]\n", playerPos.pos -> x, playerPos.pos -> y, playerPos.symbol); 
@@ -128,8 +132,7 @@ void LoopDelay(void)
 
 
 void CleanUp(void)
-{
-    MacUILib_clearScreen();    
+{    
 
     delete myPlayer;
     delete myGM;

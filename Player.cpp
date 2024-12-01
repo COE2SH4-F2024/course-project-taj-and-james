@@ -175,8 +175,8 @@ void Player::movePlayer()
         playerPosList->removeTail();
     }        
 
-    for(int i = 0; i < (playerPosList->getSize()) - 2; i++){
-        if(snakehead.pos->x == playerPosList->getElement(i+2).getObjPos().pos->x && snakehead.pos->y == playerPosList->getElement(i+2).getObjPos().pos->y){
+    for(int i = 2; i < (playerPosList->getSize()); i++){
+        if(snakeheadCopy.pos->x == playerPosList->getElement(i).getObjPos().pos->x && snakeheadCopy.pos->y == playerPosList->getElement(i).getObjPos().pos->y){
             mainGameMechsRef->setLoseFlag();
             mainGameMechsRef->setExitTrue();
         }
