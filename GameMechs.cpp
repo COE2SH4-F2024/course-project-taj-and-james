@@ -23,6 +23,28 @@ GameMechs::GameMechs(int boardX, int boardY)
     boardSizeY = boardY;   
 }
 
+GameMechs::GameMechs(const GameMechs &copy){
+    input = 0;
+    exitFlag = false;
+    loseFlag = false;
+    score = 0;
+    
+    boardSizeX = copy.boardSizeX;
+    boardSizeY = copy.boardSizeY;
+}
+
+GameMechs& GameMechs::operator=(const GameMechs &copy){
+     if(this != &copy){
+        input = 0;
+        exitFlag = false;
+        loseFlag = false;
+        score = 0;
+        this->boardSizeX = copy.boardSizeX;
+        this->boardSizeY = copy.boardSizeY;
+     }
+     return *this;
+}
+
 // Copy COnstructor
 
 // Copy Assignment Operatoer

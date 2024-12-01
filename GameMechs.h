@@ -46,6 +46,8 @@ class GameMechs
         
         // More methods should be added here
 
+        GameMechs(const GameMechs &copy);
+        GameMechs& operator=(const GameMechs &copy);
         void generateFood(objPosArrayList* blockOff);
         objPos getFoodPos();
 

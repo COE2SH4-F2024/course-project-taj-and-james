@@ -136,7 +136,5 @@ void CleanUp(void)
 
     delete myPlayer;
     delete myGM;
-    delete myPlayer;
-
     MacUILib_uninit();
 }
