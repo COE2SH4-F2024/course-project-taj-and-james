@@ -150,42 +150,40 @@ void Player::movePlayer()
             break;
     }
 
-    if(snakeheadCopy.pos->x == mainGameMechsRef->getFoodPos().pos->x && snakeheadCopy.pos->y == mainGameMechsRef->getFoodPos().pos->y){
-        playerPosList->insertHead(snakeheadCopy);
-        mainGameMechsRef->incrementScore();
+    if(snakeheadCopy.pos->x == mainGameMechsRef->getFoodPos().pos->x && snakeheadCopy.pos->y == mainGameMechsRef->getFoodPos().pos->y){ //checks if snake has colided with food
+        playerPosList->insertHead(snakeheadCopy); //adds a head element without removing the tail in order to make snake grow
+        mainGameMechsRef->incrementScore(); // add to score when food is eaten
     }
 
     
-    if(snakeheadCopy.pos -> x > 28){
-        snakeheadCopy.pos -> x = 1;
-        playerPosList->insertHead(snakeheadCopy);
-        playerPosList->removeTail();
+    if(snakeheadCopy.pos -> x > 28){ //Wraparound for when snake crosses right border
+        snakeheadCopy.pos -> x = 1; //sets the snake head copy on the other side of the board, this is done for each border in the following if statments
+        playerPosList->insertHead(snakeheadCopy); //Sets the player position to the copy position
+        playerPosList->removeTail(); //Removes the tail since the player would grow from the addition of the snakehead copy
     }
 
-    if(snakeheadCopy.pos -> x < 1){
+    if(snakeheadCopy.pos -> x < 1){ //Wraparound for when snake crosses left border
         snakeheadCopy.pos -> x = 28;
         playerPosList->insertHead(snakeheadCopy);
         playerPosList->removeTail();
     }
 
-    if(snakeheadCopy.pos -> y > 13){
+    if(snakeheadCopy.pos -> y > 13){ //Wraparound for when snake crosses bottom border
         snakeheadCopy.pos -> y = 1;
         playerPosList->insertHead(snakeheadCopy);
         playerPosList->removeTail();
     }
-    if(snakeheadCopy.pos -> y < 1){
+    if(snakeheadCopy.pos -> y < 1){ //Wraparound for when snake crossees top border
         snakeheadCopy.pos -> y = 13;
         playerPosList->insertHead(snakeheadCopy);
         playerPosList->removeTail();
     }        
 
-    for(int i = 2; i < (playerPosList->getSize()); i++){
-        if(snakeheadCopy.pos->x == playerPosList->getElement(i).getObjPos().pos->x && snakeheadCopy.pos->y == playerPosList->getElement(i).getObjPos().pos->y){
-            mainGameMechsRef->setLoseFlag();
-            mainGameMechsRef->setExitTrue();
+    for(int i = 2; i < (playerPosList->getSize()); i++){ //Iterates through all of the snake body elements other than the head
+        if(snakeheadCopy.pos->x == playerPosList->getElement(i).getObjPos().pos->x && snakeheadCopy.pos->y == playerPosList->getElement(i).getObjPos().pos->y){ //Checks if the snakehead equals any of its body elements
+            mainGameMechsRef->setLoseFlag(); //if the snakehead is equal to its body, it sets the lose flag to true indicate the player has lost
+            mainGameMechsRef->setExitTrue(); //Once the player loses the game begins it end sequence
         }
     }
 
 }
-
-// More methods to be added
