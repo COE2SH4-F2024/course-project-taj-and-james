@@ -98,44 +98,44 @@ int GameMechs::getBoardSizeY() const
 
 void GameMechs::setExitTrue()
 {
-    exitFlag = true;        // Did it cause i think its right 
+    exitFlag = true; 
 }
 
 void GameMechs::setLoseFlag()
 {
-    loseFlag = true;   // Did it cause i think its right 
+    loseFlag = true;  
 }
 
 void GameMechs::setInput(char this_input)
 {
-    this_input = input;   // I THINK THIS IS RIGHT IDK?
+    input = this_input;
 }
 
 void GameMechs::clearInput()
 {
-    input = 0;    // ALSO THINK ITS RIGHT
+    input = 0;
 }
 
 // More methods should be added here
 
-void GameMechs::generateFood(objPosArrayList* blockOff)
+void GameMechs::generateFood(objPosArrayList* blockOff) //blockOff is the player position
 {
     srand(time(NULL)); //seeds random number generator with current time
 
-    int x, y, i, flag = 0;
+    int x, y, i, flag = 0; // x and y are temporary variables to store randomly generated coordinates, flag checks if the generated values have been assigned to the position of the food
 
-    x = (rand() % (boardSizeX-2)+1);
+    x = (rand() % (boardSizeX-2)+1);// generates random x and y coordinates on the game board
     y = (rand() % (boardSizeY-2)+1);
 
     for(i = 0; i < blockOff->getSize(); i++)
-        if(x==(blockOff->getElement(i).getObjPos().pos->x) && y==(blockOff->getElement(i).getObjPos().pos->y))
+        if(x==(blockOff->getElement(i).getObjPos().pos->x) && y==(blockOff->getElement(i).getObjPos().pos->y)) //Checks if the food has been generated where the player is
         {
-            generateFood(blockOff);    // JAMES FAULT IF IT DOESNT WORK
-            flag = 1;
+            generateFood(blockOff); //Re-runs the generateFood function
+            flag = 1; //Marks that the food position should not be updated with the values which match the player position
         }
     
     if(flag!=1){
-        foodPos.pos->x = x;
+        foodPos.pos->x = x;//Updates the food position only if it doesn't match the player position
         foodPos.pos->y = y;  
     }
       
