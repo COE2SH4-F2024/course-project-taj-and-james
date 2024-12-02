@@ -10,8 +10,8 @@ Player::Player(GameMechs* thisGMRef)
     // playerPos.pos->x = mainGameMechsRef -> getBoardSizeX() / 2;
     // playerPos.pos->y = mainGameMechsRef -> getBoardSizeY() / 2;
     // playerPos.symbol = '@';
-    playerPosList = new objPosArrayList();
-    playerPosList->insertHead(objPos(15, 7, '*'));
+    playerPosList = new objPosArrayList();                   //Making space in heap.
+    playerPosList->insertHead(objPos(15, 7, '*'));            //Adding an element to the list with the coordinates of the middle of the board.
 }
 
 
@@ -26,12 +26,12 @@ Player::~Player()
 objPosArrayList* Player::getPlayerPos() const
 {
     // return the reference to the playerPos arrray list
-    return playerPosList;
+    return playerPosList;     
 }
 
 void Player::updatePlayerDir()
 {
-    char input = mainGameMechsRef -> getInput();
+    char input = mainGameMechsRef -> getInput();        //Gets the user input.
     
 
         // PPA3 input processing logic       
@@ -47,36 +47,36 @@ void Player::updatePlayerDir()
 
             case 'a':
             case 'A':
-                if(myDir != RIGHT)
+                if(myDir != RIGHT)         //Checks that the direction is not changing by more than 90 degrees
                 {
-                    myDir = LEFT;
+                    myDir = LEFT;           //Sets the new direction
                 }
                 break;
 
             case 's':
             case 'S':
-                if(myDir != UP)
+                if(myDir != UP)   //Checks that the direction is not changing by more than 90 degrees
                 {
-                    myDir = DOWN;
+                    myDir = DOWN;   //Sets the new direction
                 }
                 break;
 
             
             case 'd':
             case 'D':
-                if(myDir != LEFT)
+                if(myDir != LEFT)   //Checks that the direction is not changing by more than 90 degrees
                 {
-                    myDir = RIGHT;
+                    myDir = RIGHT;  //Sets the new direction
                 }
                 break;
 
-            default:  
-                if(input == 'a'|| input == 'A'){
+            default:                                             //Default case if no conditions in switch cases are met.
+                if(input == 'a'|| input == 'A'){              
                     myDir = LEFT;
                 }       
                 else if(input == 'd'|| input == 'D'){
                     myDir = RIGHT;
-                }
+                }                                                    //Determing in what direction to start moving given an input.
                 else if(input == 'w'|| input == 'W'){
                     myDir = UP;
                 }       
@@ -85,65 +85,65 @@ void Player::updatePlayerDir()
                 }
                 break;
         }
-        input = 0;
+        input = 0;   //Resets input.
     }
 
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
-    objPos snakehead;
-    snakehead = playerPosList->getHeadElement().getObjPos();
-    objPos snakeheadCopy = playerPosList->getHeadElement().getObjPos();
+    objPos snakehead;   //Temparory objPos variable.
+    snakehead = playerPosList->getHeadElement().getObjPos();         //Setting the variabel to the position of the head element of the list.
+    objPos snakeheadCopy = playerPosList->getHeadElement().getObjPos();        //Another variable(copy) also set to the position of the head element of the list.
 
     switch(myDir){
 
 
-        case LEFT:
-            if(snakehead.pos->x == 1){
-                snakeheadCopy.pos->x = 28;
+        case LEFT:                             
+            if(snakehead.pos->x == 1){                  //Part of wraparound logic when moving left.
+                snakeheadCopy.pos->x = 28;              //When the snakehead is about to hit the border, places it on the far right side.
             }
             else{
-                snakeheadCopy.pos->x = --snakehead.pos-> x;
+                snakeheadCopy.pos->x = --snakehead.pos-> x;    //If not near a border, then make snakeheadcopy a position in front of snakehead.
             }
             
-            playerPosList->insertHead(snakeheadCopy);
-            playerPosList->removeTail();
+            playerPosList->insertHead(snakeheadCopy);      //Part of moving element. Insert a new element at the head of the list at one position in front of snakehead(snakeheadcopy).
+            playerPosList->removeTail();                   //Remove the last element of the list so the snake appears to be moving forward.
             break;
 
         case RIGHT:
-            if(snakehead.pos->x == 28){
-                snakeheadCopy.pos->x = 1;
+            if(snakehead.pos->x == 28){               //Part of wraparound logic when moving right.
+                snakeheadCopy.pos->x = 1;             //When the snakehead is about to hit the border, places it on the far left side.
             }
             else{
-                snakeheadCopy.pos->x = ++snakehead.pos-> x;
+                snakeheadCopy.pos->x = ++snakehead.pos-> x;      //If not near a border, then make snakeheadcopy a position in front of snakehead.
             }
 
-            playerPosList->insertHead(snakeheadCopy);
-            playerPosList->removeTail();
+            playerPosList->insertHead(snakeheadCopy);           //Part of moving element. Insert a new element at the head of the list at one position in front of snakehead(snakeheadcopy).
+            playerPosList->removeTail();                        //Remove the last element of the list so the snake appears to be moving forward.
             break;
 
         case UP:
-            if(snakehead.pos->y == 1){
-                snakeheadCopy.pos->y = 13;
+            if(snakehead.pos->y == 1){                 //Part of wraparound logic when moving up.
+                snakeheadCopy.pos->y = 13;              //When the snakehead is about to hit the border, places it on the far bottom side. 
             }
             else{
-                snakeheadCopy.pos->y = --snakehead.pos-> y;
+                snakeheadCopy.pos->y = --snakehead.pos-> y;         //If not near a border, then make snakeheadcopy a position in front of snakehead.
             }
             
-            playerPosList->insertHead(snakeheadCopy);
-            playerPosList->removeTail();
+            playerPosList->insertHead(snakeheadCopy);                //Part of moving element. Insert a new element at the head of the list at one position in front of snakehead(snakeheadcopy).
+            playerPosList->removeTail();                              //Remove the last element of the list so the snake appears to be moving forward.
             break;
         
         case DOWN:
-            if(snakehead.pos->y == 13){
-                snakeheadCopy.pos->y = 1;
+            if(snakehead.pos->y == 13){               //Part of wraparound logic when moving down.
+                snakeheadCopy.pos->y = 1;              //When the snakehead is about to hit the border, places it on the far top side.
             }
             else{
-                snakeheadCopy.pos->y = ++snakehead.pos-> y;
-            }
+                snakeheadCopy.pos->y = ++snakehead.pos-> y;           //If not near a border, then make snakeheadcopy a position in front of snakehead.
+            } 
             
-            playerPosList->insertHead(snakeheadCopy);
-            playerPosList->removeTail();
+            playerPosList->insertHead(snakeheadCopy);                    //Part of moving element. Insert a new element at the head of the list at one position in front of snakehead(snakeheadcopy).
+            playerPosList->removeTail();                                  //Remove the last element of the list so the snake appears to be moving forward.
             break;
 
         default:

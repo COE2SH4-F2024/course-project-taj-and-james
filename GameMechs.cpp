@@ -25,7 +25,7 @@ GameMechs::GameMechs(int boardX, int boardY)
 
 GameMechs::GameMechs(const GameMechs &copy){
     input = 0;
-    exitFlag = false;
+    exitFlag = false;                    // Copy Construtor, implementing rules of 4.
     loseFlag = false;
     score = 0;
     
@@ -37,7 +37,7 @@ GameMechs& GameMechs::operator=(const GameMechs &copy){
      if(this != &copy){
         input = 0;
         exitFlag = false;
-        loseFlag = false;
+        loseFlag = false;             //Copy Assignment Operator, implementing rules of 4.
         score = 0;
         this->boardSizeX = copy.boardSizeX;
         this->boardSizeY = copy.boardSizeY;
@@ -77,43 +77,43 @@ char GameMechs::getInput()
 
 int GameMechs::getScore() const
 {
-    return score;
+    return score;         //Gets the score
 }
 
 void GameMechs::incrementScore()
 {
-    score++;
+    score++;            //Increment the score.
 }
 
 int GameMechs::getBoardSizeX() const
 {
-    return boardSizeX;
+    return boardSizeX;     //Returns the wdith of the board.
 }
 
 int GameMechs::getBoardSizeY() const
 {
-    return boardSizeY;
+    return boardSizeY;       //Returns the length of the board.
 }
 
 
 void GameMechs::setExitTrue()
 {
-    exitFlag = true; 
+    exitFlag = true;    //Will set the exitflag to true so it exits the code when called.
 }
 
 void GameMechs::setLoseFlag()
 {
-    loseFlag = true;  
+    loseFlag = true;  //Sets loseflag to true and used when the player loses the game.
 }
 
 void GameMechs::setInput(char this_input)
 {
-    input = this_input;
+    input = this_input;    //Making a variable for the input.
 }
 
 void GameMechs::clearInput()
 {
-    input = 0;
+    input = 0;  //Clears Input.
 }
 
 // More methods should be added here

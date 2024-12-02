@@ -46,8 +46,8 @@ class GameMechs
         
         // More methods should be added here
 
-        GameMechs(const GameMechs &copy);
-        GameMechs& operator=(const GameMechs &copy);
+        GameMechs(const GameMechs &copy);        // Copy Construtor, implementing rules of 4.
+        GameMechs& operator=(const GameMechs &copy);   //Copy Assignment Operator, implementing rules of 4.
         void generateFood(objPosArrayList* blockOff);
         objPos getFoodPos();
 

@@ -36,7 +36,7 @@ objPos& objPos:: operator=(const objPos &copy){
 }
 
 objPos::~objPos(){
-    delete pos;
+    delete pos;    // Destructor
 }
 
 
@@ -58,7 +58,7 @@ objPos objPos::getObjPos() const
 {
     objPos returnPos;
     returnPos.pos->x = pos->x;
-    returnPos.pos->y = pos->y;
+    returnPos.pos->y = pos->y;  //returns the object position and the symbol of the object.
     returnPos.symbol = symbol;
     
     return returnPos;
@@ -66,12 +66,12 @@ objPos objPos::getObjPos() const
 
 char objPos::getSymbol() const
 {
-    return symbol;
+    return symbol; 
 }
 
 bool objPos::isPosEqual(const objPos* refPos) const
 {
-    return (refPos->pos->x == pos->x && refPos->pos->y == pos->y);
+    return (refPos->pos->x == pos->x && refPos->pos->y == pos->y);   
 }
 
 char objPos::getSymbolIfPosEqual(const objPos* refPos) const
